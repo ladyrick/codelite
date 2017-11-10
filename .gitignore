@@ -1,0 +1,6 @@
+/.codelite
+Makefile
+*.mk
+*.txt
+Debug/
+Release/

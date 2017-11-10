@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Workspace Name="codelite" Database="" Version="10.0.0">
+  <Project Name="ch2_1" Path="ch2_1/ch2_1.project" Active="No"/>
+  <Project Name="ch2_2" Path="ch2_3/ch2_3.project" Active="No"/>
+  <Project Name="ch3_1" Path="ch3_1/ch3_1.project" Active="No"/>
+  <Project Name="ch3_2" Path="ch3_2/ch3_2.project" Active="No"/>
+  <Project Name="ch3_4" Path="ch3_4/ch3_4.project" Active="No"/>
+  <Project Name="ch4_1" Path="ch4_1/ch4_1.project" Active="Yes"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Environment/>
+      <Project Name="ch2_1" ConfigName="Debug"/>
+      <Project Name="ch2_2" ConfigName="Debug"/>
+      <Project Name="ch3_1" ConfigName="Debug"/>
+      <Project Name="ch3_2" ConfigName="Debug"/>
+      <Project Name="ch3_4" ConfigName="Debug"/>
+      <Project Name="ch4_1" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Environment/>
+      <Project Name="ch2_1" ConfigName="Release"/>
+      <Project Name="ch2_2" ConfigName="Release"/>
+      <Project Name="ch3_1" ConfigName="Release"/>
+      <Project Name="ch3_2" ConfigName="Release"/>
+      <Project Name="ch3_4" ConfigName="Release"/>
+      <Project Name="ch4_1" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>
