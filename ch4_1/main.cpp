@@ -88,10 +88,10 @@ void e5() {
 REG(e5);
 
 int main() {
-    vector<int> test;
     vector<pFunc>::iterator it;
     vector<pFunc> &f = Func::vfunc;
     for(it = f.begin(); it != f.end(); it++) {
         (*it)();
     }
+    return 0;
 }
