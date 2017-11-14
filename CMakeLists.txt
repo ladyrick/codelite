@@ -9,6 +9,8 @@ function(add_dir_target DIR)
     add_executable(tag_${DIR} ${dir_${DIR}})
 endfunction()
 
+link_libraries(gtest)
+
 add_dir_target(test)
 add_dir_target(ch2_1)
 add_dir_target(ch2_3)
