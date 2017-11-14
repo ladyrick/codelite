@@ -1,21 +1,29 @@
 #include <unistd.h>
 #include <iostream>
 
+#define CATCH_CONFIG_RUNNER
+
+#include <catch.hpp>
+
 using namespace std;
 
-int main() {
-    pid_t fpid; //fpid表示fork函数返回的值
-    int count = 0;
-    fpid = fork();
-    if (fpid < 0)
-        cout << "error in fork!" << endl;
-    else if (fpid == 0) {
-        cout << "I am the child process, my process id is " << getpid() << endl;
-        count++;
-    } else {
-        cout << "I am the parent process, my process id is " << getpid() << endl;
-        count++;
-    }
-    cout << "count = " << count << endl;
-    return 0;
+unsigned int Factorial(unsigned int number) {
+    return number <= 1 ? number : Factorial(number - 1) * number;
+}
+
+TEST_CASE("Factorials are computed", "factorial") {
+    REQUIRE(Factorial(1) == 1);
+    REQUIRE(Factorial(2) == 2);
+    REQUIRE(Factorial(3) == 6);
+    REQUIRE(Factorial(10) == 3628800);
+}
+
+int main(int argc, char *argv[]) {
+    // global setup...
+
+    int result = Catch::Session().run(argc, argv);
+
+    // global clean-up...
+
+    return result;
 }
