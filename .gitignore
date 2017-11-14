@@ -1,10 +1,13 @@
-/.codelite
-/.idea
+.codelite
+.idea
+.vscode
 *.mk
 *.txt
 !CMakeLists.txt
+Makefile
 Debug/
 Release/
+*.exe
 *.project
 *.workspace
 /cmake-build-*
