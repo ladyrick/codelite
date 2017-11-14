@@ -1,6 +1,10 @@
 /.codelite
-Makefile
+/.idea
 *.mk
 *.txt
+!CMakeLists.txt
 Debug/
 Release/
+*.project
+*.workspace
+/cmake-build-*
