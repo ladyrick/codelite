@@ -9,7 +9,7 @@ class CSum {
 private:
     _outPara sum;
 public:
-    CSum() : sum(0) {}
+    CSum(_inPara init = 0) : sum(init) {}
 
     void operator()(_inPara n) {
         sum += n;
@@ -25,7 +25,7 @@ int main() {
     for (int i = 0; i < 100; i++) {
         v.push_back(i + 1);
     }
-    auto obj = for_each(v.begin(), v.end(), CSum<int, double>());
+    auto obj = for_each(v.begin(), v.end(), CSum<int, double>(0));
     cout << obj.getSum() << endl;
     return 0;
 }
