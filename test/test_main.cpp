@@ -1,13 +1,10 @@
-
-
-#include <stdio.h>
-#include <unistd.h>
 #include <iostream>
+#include <string>
+using namespace std;
 
-int main() {
-    printf("printf   \n");
-    sleep(1);
-    pid_t pid = fork();
-    std::cout << "why there are 2 \"printf\"?\n";
-    return 0;
+int main(){
+    string s1 = "123";
+    string s2 = move(s1);
+    s1[1] = 'a';
+    cout << s1;
 }
