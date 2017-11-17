@@ -1,14 +1,15 @@
 #ifndef MYLINK_HPP
 #define MYLINK_HPP
+
 #include <iostream>
 
-template <class T>
+template<class T>
 struct Unit {
     T value;
     Unit *next;
 };
 
-template <class T>
+template<class T>
 class MyLink {
 public:
     class LinkIterator {
@@ -18,12 +19,15 @@ public:
         LinkIterator(Unit<T> *init) {
             this->init = init;
         }
+
         bool operator!=(LinkIterator &it) {
             return this->init != it.init;
         }
+
         void operator++(int) {
             init = init->next;
         }
+
         Unit<T> operator*() {
             return *init;
         }
@@ -41,7 +45,7 @@ public:
         Unit<T> *u = new Unit<T>();
         u->value = value;
         u->next = nullptr;
-        if(head == nullptr) {
+        if (head == nullptr) {
             head = u;
             prev = u;
         } else {
@@ -52,10 +56,10 @@ public:
     }
 
     virtual ~MyLink() {
-        if(head != nullptr) {
+        if (head != nullptr) {
             Unit<T> *prev = head;
             Unit<T> *next = nullptr;
-            while(prev != tail) {
+            while (prev != tail) {
                 next = prev->next;
                 delete prev;
                 prev = next;
@@ -72,7 +76,7 @@ public:
     }
 };
 
-template <class T>
+template<class T>
 std::ostream &operator<<(std::ostream &os, const Unit<T> &s) {
     os << s.value;
     return os;

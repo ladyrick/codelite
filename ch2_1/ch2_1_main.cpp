@@ -1,7 +1,8 @@
 #include <cstdio>
+
 using namespace std;
 
-template <class T>
+template<class T>
 class MyArray {
 private:
     int m_nTotalSize;
@@ -16,18 +17,18 @@ public:
     }
 
     void Add(T value) {
-        if(m_nValidSize < m_nTotalSize) {
+        if (m_nValidSize < m_nTotalSize) {
             m_pData[m_nValidSize] = value;
             m_nValidSize++;
         } else {
             T *tempData = new T[m_nTotalSize];
-            for(int i = 0; i < m_nTotalSize; i++) {
+            for (int i = 0; i < m_nTotalSize; i++) {
                 tempData[i] = m_pData[i];
             }
             delete[] m_pData;
             m_nTotalSize *= 2;
             m_pData = new T[m_nTotalSize];
-            for(int i = 0; i < m_nValidSize; i++) {
+            for (int i = 0; i < m_nValidSize; i++) {
                 m_pData[i] = tempData[i];
             }
             delete[] tempData;
@@ -45,7 +46,7 @@ public:
     }
 
     virtual ~MyArray() {
-        if(m_pData != nullptr) {
+        if (m_pData != nullptr) {
             delete m_pData;
             m_pData = nullptr;
         }
@@ -55,10 +56,10 @@ public:
 int main() {
     MyArray<int> obj;
 
-    for(int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++) {
         obj.Add(i + 1);
     }
-    for(int i = 0; i < obj.GetSize(); i++) {
+    for (int i = 0; i < obj.GetSize(); i++) {
         printf("%d\n", obj.Get(i));
     }
     return 0;

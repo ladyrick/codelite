@@ -1,4 +1,5 @@
 #include <iostream>
+
 using namespace std;
 
 class CIntArray {
@@ -6,13 +7,14 @@ class CIntArray {
 
 public:
     CIntArray() {
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             a[i] = i + 1;
         }
     }
+
     int getSum(int times) {
         int sum = 0;
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             sum += a[i];
         }
         return sum * times;
@@ -24,13 +26,14 @@ class CFloatArray {
 
 public:
     CFloatArray() {
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             f[i] = i + 1;
         }
     }
+
     float getSum(float times) {
         float sum = 0;
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             sum += f[i];
         }
         return sum * times;
@@ -38,18 +41,19 @@ public:
 };
 
 //定义基本模板类
-template <typename T>
-class NumTraits {};
+template<typename T>
+class NumTraits {
+};
 
 //模板特化
-template <>
+template<>
 class NumTraits<CIntArray> {
 public:
     typedef int resulttype;
     typedef int inputpara;
 };
 
-template <>
+template<>
 class NumTraits<CFloatArray> {
 public:
     typedef float resulttype;
@@ -57,11 +61,12 @@ public:
 };
 
 //统一模板调用类编制
-template <typename T>
+template<typename T>
 class CApply {
 public:
     typedef typename NumTraits<T>::resulttype result;
     typedef typename NumTraits<T>::inputpara input;
+
     result getSum(T &obj, input in) {
         return obj.getSum(in);
     }

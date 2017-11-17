@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
 typedef void (*pFunc)();
@@ -7,12 +8,15 @@ typedef void (*pFunc)();
 class Func {
 public:
     static vector<pFunc> vfunc;
+
     Func() {
     }
+
     Func(pFunc f) {
         vfunc.push_back(f);
     }
 };
+
 vector<pFunc> Func::vfunc;
 #define REG(func) Func f_##func(func)
 
@@ -60,10 +64,10 @@ void e4() {
     cout << "need an integer:" << endl;
     cin >> a;
     cout << "cin.rdstate: " << cin.rdstate() << endl;
-    if(cin.good()) {
+    if (cin.good()) {
         cout << "good" << endl;
     }
-    if(cin.fail()) {
+    if (cin.fail()) {
         cout << "fail" << endl;
     }
 }
@@ -72,9 +76,9 @@ void e4() {
 void e5() {
     int a;
     cout << "input an integer:" << endl;
-    while(true) {
+    while (true) {
         cin >> a;
-        if(cin.fail()) {
+        if (cin.fail()) {
             cout << "error input!" << endl;
             cin.clear();
             cin.sync();
@@ -85,12 +89,13 @@ void e5() {
         }
     }
 }
+
 REG(e5);
 
 int main() {
     vector<pFunc>::iterator it;
     vector<pFunc> &f = Func::vfunc;
-    for(it = f.begin(); it != f.end(); it++) {
+    for (it = f.begin(); it != f.end(); it++) {
         (*it)();
     }
     return 0;

@@ -1,8 +1,9 @@
 #include <cstdio>
 #include <iostream>
+
 using namespace std;
 
-template <class T>
+template<class T>
 class MyArray {
 private:
     int m_nTotalSize;
@@ -17,18 +18,18 @@ public:
     }
 
     void Add(T value) {
-        if(m_nValidSize < m_nTotalSize) {
+        if (m_nValidSize < m_nTotalSize) {
             m_pData[m_nValidSize] = value;
             m_nValidSize++;
         } else {
             T *tempData = new T[m_nTotalSize];
-            for(int i = 0; i < m_nTotalSize; i++) {
+            for (int i = 0; i < m_nTotalSize; i++) {
                 tempData[i] = m_pData[i];
             }
             delete[] m_pData;
             m_nTotalSize *= 2;
             m_pData = new T[m_nTotalSize];
-            for(int i = 0; i < m_nValidSize; i++) {
+            for (int i = 0; i < m_nValidSize; i++) {
                 m_pData[i] = tempData[i];
             }
             delete[] tempData;
@@ -46,7 +47,7 @@ public:
     }
 
     virtual ~MyArray() {
-        if(m_pData != nullptr) {
+        if (m_pData != nullptr) {
             delete m_pData;
             m_pData = nullptr;
         }
@@ -61,13 +62,13 @@ public:
     }
 };
 
-template <class T>
+template<class T>
 struct Unit {
     T value;
     Unit *next;
 };
 
-template <class T>
+template<class T>
 class MyLink {
 public:
     Unit<T> *head, *tail, *prev;
@@ -81,7 +82,7 @@ public:
         Unit<T> *u = new Unit<T>();
         u->value = value;
         u->next = nullptr;
-        if(head == nullptr) {
+        if (head == nullptr) {
             head = u;
             prev = u;
         } else {
@@ -92,10 +93,10 @@ public:
     }
 
     virtual ~MyLink() {
-        if(head != nullptr) {
+        if (head != nullptr) {
             Unit<T> *prev = head;
             Unit<T> *next = nullptr;
-            while(prev != tail) {
+            while (prev != tail) {
                 next = prev->next;
                 delete prev;
                 prev = next;
@@ -112,14 +113,14 @@ public:
     }
 };
 
-template <class Init>
+template<class Init>
 void display(Init start, Init end) {
-    for(Init mid = start; mid != end; mid++) {
+    for (Init mid = start; mid != end; mid++) {
         cout << *mid << endl;
     }
 }
 
-template <class Init>
+template<class Init>
 class ArrayIterator {
     Init *init;
 
@@ -127,18 +128,21 @@ public:
     ArrayIterator(Init *init) {
         this->init = init;
     }
+
     bool operator!=(ArrayIterator &it) {
         return this->init != it.init;
     }
+
     void operator++(int) { // 有时候本不需要参数，但是为了结构，必须有一个参数。就可以只写一个int。
         init++;
     }
+
     Init operator*() {
         return *init;
     }
 };
 
-template <class Init>
+template<class Init>
 class LinkIterator {
     Init *init;
 
@@ -146,18 +150,21 @@ public:
     LinkIterator(Init *init) {
         this->init = init;
     }
+
     bool operator!=(LinkIterator &it) {
         return this->init != it.init;
     }
+
     void operator++(int) {
         init = init->next;
     }
+
     Init operator*() {
         return *init;
     }
 };
 
-template <class T>
+template<class T>
 ostream &operator<<(ostream &os, const Unit<T> &s) {
     os << s.value;
     return os;
@@ -166,16 +173,16 @@ ostream &operator<<(ostream &os, const Unit<T> &s) {
 void oldMethod() {
     MyArray<int> arrayobj;
 
-    for(int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++) {
         arrayobj.Add(i + 1);
     }
-    for(int i = 0; i < arrayobj.GetSize(); i++) {
+    for (int i = 0; i < arrayobj.GetSize(); i++) {
         cout << arrayobj.Get(i) << endl;
     }
 
     MyLink<int> linkobj;
 
-    for(int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++) {
         linkobj.Add(i + 1);
     }
 }
@@ -183,7 +190,7 @@ void oldMethod() {
 void newMethod() {
     cout << "MyArray" << endl;
     MyArray<int> ary;
-    for(int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++) {
         ary.Add(i + 1);
     }
     ArrayIterator<int> start1(ary.Begin());
@@ -192,7 +199,7 @@ void newMethod() {
 
     cout << "MyLink" << endl;
     MyLink<int> lnk;
-    for(int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++) {
         lnk.Add(i + 1);
     }
     LinkIterator<Unit<int> > start2(lnk.Begin());

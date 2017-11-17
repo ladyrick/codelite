@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <iomanip>
+
 using namespace std;
 
 typedef void (*pFunc)();
@@ -11,18 +12,21 @@ typedef void (*pFunc)();
 class Func {
 public:
     static vector<pFunc> vfunc;
+
     Func() {
     }
+
     Func(pFunc f) {
         vfunc.push_back(f);
     }
 };
+
 vector<pFunc> Func::vfunc;
 #define REG(func) Func f_##func(func)
 
 void e1() {
     ofstream fout("test.txt");
-    for(int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++) {
         fout << i << endl;
         cout << i << endl;
     }
@@ -32,12 +36,12 @@ void e1() {
 
 void e2() {
     ifstream fin("test.txt");
-    if(!fin.good()) {
+    if (!fin.good()) {
         cout << "fin not good" << endl;
         return;
     }
     char Buf[100];
-    while(fin.getline(Buf, 100)) {
+    while (fin.getline(Buf, 100)) {
         cout << Buf << endl;
     }
     fin.close();
@@ -50,11 +54,11 @@ struct STU {
 };
 
 void e3() {
-    STU stu1 = { "Alice", 100 };
-    STU stu2 = { "Bob", 150 };
+    STU stu1 = {"Alice", 100};
+    STU stu2 = {"Bob", 150};
     ofstream fout("binary.txt", ios::binary);
-    fout.write((const char *)&stu1, sizeof(STU));
-    fout.write((const char *)&stu2, sizeof(STU));
+    fout.write((const char *) &stu1, sizeof(STU));
+    fout.write((const char *) &stu2, sizeof(STU));
     fout.close();
 }
 //REG(e3);
@@ -62,8 +66,8 @@ void e3() {
 void e4() {
     STU stu1, stu2;
     ifstream fin("binary.txt", ios::binary);
-    fin.read((char *)&stu1, sizeof(STU));
-    fin.read((char *)&stu2, sizeof(STU));
+    fin.read((char *) &stu1, sizeof(STU));
+    fin.read((char *) &stu2, sizeof(STU));
     cout << stu1.str << '\t' << stu1.grade << endl;
     cout << stu2.str << '\t' << stu2.grade << endl;
     fin.close();
@@ -72,7 +76,7 @@ void e4() {
 
 void e5() {
     ifstream fin("test.txt");
-    if(fin.good()) {
+    if (fin.good()) {
         cout << fin.rdbuf();
     } else {
         cout << "File doesn't exist." << endl;
@@ -170,12 +174,13 @@ void e10() {
     constShow(stu1);
     constShow(stu2);
 }
+
 REG(e10);
 
 int main(int argc, char *argv[]) {
     vector<pFunc>::iterator it;
     vector<pFunc> &f = Func::vfunc;
-    for(it = f.begin(); it != f.end(); it++) {
+    for (it = f.begin(); it != f.end(); it++) {
         (*it)();
     }
     return 0;
