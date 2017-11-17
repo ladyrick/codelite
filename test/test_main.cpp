@@ -10,7 +10,7 @@ int test(int n) {
     return n;
 }
 
-TEST(a, b) {
+TEST(a, b) { // NOLINT
     EXPECT_EQ(test(1), 1);
     EXPECT_EQ(test(2), 2);
     EXPECT_EQ(test(3), 3);
@@ -24,6 +24,4 @@ int main(int argc, char **argv) {
 
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
-
-    return 0;
 }
