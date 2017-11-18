@@ -2,7 +2,6 @@
 #include <list>
 #include <vector>
 #include <random>
-#include <algorithm>
 
 using namespace std;
 typedef list<int> lint;
@@ -44,13 +43,16 @@ void e3() {
 
 void e4() {
     lint l = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    lint m = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    lint m = {1, 2, 3, 4, 5, 6, 7, 8, 6};
     l.splice(l.begin(), m, m.begin(), --m.end());
     display<lint>(l);
     display<lint>(m);
     l.end()--;
     display<lint>(l);
     l.reverse();
+    display<lint>(l);
+    l.sort();
+    l.merge(m);
     display<lint>(l);
 }
 
