@@ -2,14 +2,13 @@ cmake_minimum_required(VERSION 3.8)
 project(codelite)
 
 set(CMAKE_CXX_STANDARD 11)
+#SET(CMAKE_CXX_COMPILER "clang++")
 
 # add all the files in a dir and create a target
 function(add_dir_target DIR)
     aux_source_directory(${DIR} dir_${DIR})
     add_executable(tag_${DIR} ${dir_${DIR}})
 endfunction()
-
-link_libraries(gtest)
 
 add_dir_target(test)
 add_dir_target(ch2_1)
