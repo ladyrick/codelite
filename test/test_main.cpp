@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <bitset>
+#include <typeinfo>
 
 using namespace std;
 
@@ -25,7 +26,7 @@ public:
     template<class T>
     // 构造函数竟然可以用模板？！
     explicit cast2bits(const T &input) {
-        data << input;
+        data << input << " type: " << typeid(input).name();
         const T *pTInput = &input;
         auto *pBitsinput = (bits *) pTInput;
         int n = sizeof(T) / sizeof(bits);
@@ -41,6 +42,10 @@ public:
                << (int) ((pBitsinput + i)->b7)
                << ' ';
         }
+    }
+
+    string tostring() {
+        return os.str();
     }
 
     friend ostream &operator<<(ostream &os, const cast2bits &c) {
