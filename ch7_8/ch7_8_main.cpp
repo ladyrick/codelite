@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <set>
 
 using namespace std;
@@ -32,7 +33,44 @@ void e2() {
     cout << *f << *(++f) << *(++f) << *(++f);
 }
 
+class test {
+    int a[10] = {0};
+public:
+    test() {
+        a[0] = 1;
+    }
+};
+
+class Student {
+public:
+    string name;
+    test t;
+
+    explicit Student(const string &name) : t() {
+        this->name = name;
+    }
+
+    friend bool operator<(const Student &s1, const Student &s2) {
+        return s1.name < s2.name;
+    }
+
+    friend bool operator==(const Student &s1, const Student &s2) {
+        return false;
+    }
+};
+
+void e3() {
+    set<Student> ss;
+    ss.insert(Student("1"));
+    ss.insert(Student("2"));
+    ss.insert(Student(string("2")));
+    for (auto &item : ss) {
+        cout << item.name << endl;
+    }
+}
+
 int main() {
 //    e1();
-    e2();
+//    e2();
+    e3();
 }
