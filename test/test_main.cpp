@@ -36,7 +36,31 @@ void findladyrick(const string &filename) {
     fout.close();
 }
 
+#define CHECK_LADYRICK(re) findladyrick<re>(#re)
+
 int main() {
-    findladyrick<default_random_engine>("default_random_engine");
+    CHECK_LADYRICK(default_random_engine);
+    CHECK_LADYRICK(minstd_rand);
+    CHECK_LADYRICK(minstd_rand0);
+    CHECK_LADYRICK(mt19937);
+    CHECK_LADYRICK(mt19937_64);
+    CHECK_LADYRICK(ranlux24_base);
+    CHECK_LADYRICK(ranlux48_base);
+    CHECK_LADYRICK(ranlux24);
+    CHECK_LADYRICK(ranlux48);
+    CHECK_LADYRICK(knuth_b);
     return 0;
 }
+
+/*
+default_random_engine
+minstd_rand
+minstd_rand0
+mt19937
+mt19937_64
+ranlux24_base
+ranlux48_base
+ranlux24
+ranlux48
+knuth_b
+ */
