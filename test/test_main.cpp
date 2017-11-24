@@ -13,7 +13,7 @@ const char strDes[] = "ladyrick";
 template<class RandomEngine>
 void findladyrick(const string &filename) {
     ofstream fout(string("random_engines_") + filename + ".txt");
-    for (unsigned int seed = 0; seed < MY_UINT_MAX; ++seed) {
+    for (unsigned long long seed = 0; seed < MY_UINT_MAX; ++seed) {
         RandomEngine re(seed);
         int i = 0;
         for (; i < STRLENGTH; ++i) {
