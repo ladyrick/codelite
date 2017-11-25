@@ -1,5 +1,4 @@
 #include <random>
-#include <string>
 #include <iostream>
 #include <fstream>
 
@@ -12,13 +11,13 @@ const char strDes[] = "ladyrick";
 
 template<class RandomEngine>
 void findladyrick(const string &filename) {
+    uniform_int_distribution<> dis(0, 25);
     ofstream fout(string("random_engines_") + filename + ".txt");
     for (unsigned long long seed = 0; seed < MY_UINT_MAX; ++seed) {
         RandomEngine re(seed);
-        uniform_int_distribution<> dis(0, 26);
         int i = 0;
         for (; i < STRLENGTH; ++i) {
-            if ((dis(re) % 26) != (strDes[i] - 'a')) {
+            if (dis(re) != (strDes[i] - 'a')) {
                 break;
             }
         }
@@ -26,7 +25,7 @@ void findladyrick(const string &filename) {
             RandomEngine t(seed);
             char str[STRLENGTH + 1] = {0};
             for (int j = 0; j < STRLENGTH; ++j) {
-                str[j] = dis(t) % 26 + 'a';
+                str[j] = char(dis(t) + 'a');
             }
             cout << seed << " : " << str << endl;
             if (i == STRLENGTH) {
