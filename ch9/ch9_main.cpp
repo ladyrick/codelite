@@ -4,6 +4,7 @@
 #include <vector>
 #include <ctime>
 #include <conio.h>
+
 using namespace std;
 
 void e1() {
@@ -30,19 +31,19 @@ void e4() {
     copy(a.begin(), a.end(), ostream_iterator<int>(cout, ""));
 }
 
-void delay(){
-    auto start = time(nullptr);
+void delay() {
+    auto start = clock();
     auto end = start;
-    while(start == end){
-        end = time(nullptr);
+    while (end - start < 1000) {
+        end = clock();
     }
 }
 
-void e5(){
-    int a[] = {1,2,3,4,5,6,7,8,9};
-    while(!kbhit()){
-        copy(a, a+9, ostream_iterator<int>(cout, ""));
-        rotate(a, a+1, a+9);
+void e5() {
+    int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    while (!kbhit()) {
+        copy(a, a + 9, ostream_iterator<int>(cout, ""));
+        rotate(a, a + 1, a + 9);
         delay();
         cout << endl;
     }
