@@ -11,3 +11,4 @@ Release/
 *.project
 *.workspace
 /cmake-build-*
+.DS_Store
