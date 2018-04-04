@@ -1,27 +1,66 @@
+#include <random>
 #include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm>
-#include <gtest/gtest.h>
+#include <fstream>
 
 using namespace std;
 
-int test(int n) {
-    return n;
+#define MY_UINT_MAX 4294967296ULL
+
+const char strDes[] = "ladyrick";
+#define STRLENGTH 8
+
+template<class RandomEngine>
+void findladyrick(const string &filename) {
+    uniform_int_distribution<> dis(0, 25);
+    ofstream fout(string("random_engines_") + filename + ".txt");
+    for (unsigned long long seed = 0; seed < MY_UINT_MAX; ++seed) {
+        RandomEngine re(seed);
+        int i = 0;
+        for (; i < STRLENGTH; ++i) {
+            if (dis(re) != (strDes[i] - 'a')) {
+                break;
+            }
+        }
+        if (i == STRLENGTH || seed % 100000000 == 0) {
+            RandomEngine t(seed);
+            char str[STRLENGTH + 1] = {0};
+            for (int j = 0; j < STRLENGTH; ++j) {
+                str[j] = char(dis(t) + 'a');
+            }
+            cout << seed << " : " << str << endl;
+            if (i == STRLENGTH) {
+                fout << seed << " : " << str << endl;
+            }
+        }
+    }
+    fout.close();
 }
 
-TEST(a, b) { // NOLINT
-    EXPECT_EQ(test(1), 1);
-    EXPECT_EQ(test(2), 2);
-    EXPECT_EQ(test(3), 3);
+#define CHECK_LADYRICK(re) findladyrick<re>(#re)
+
+int main() {
+    CHECK_LADYRICK(default_random_engine);
+    CHECK_LADYRICK(minstd_rand);
+    CHECK_LADYRICK(minstd_rand0);
+    CHECK_LADYRICK(mt19937);
+    CHECK_LADYRICK(mt19937_64);
+    CHECK_LADYRICK(ranlux24_base);
+    CHECK_LADYRICK(ranlux48_base);
+    CHECK_LADYRICK(ranlux24);
+    CHECK_LADYRICK(ranlux48);
+    CHECK_LADYRICK(knuth_b);
+    return 0;
 }
 
-int main(int argc, char **argv) {
-    int a[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    vector<int> v;
-    copy(a, a + 10, back_inserter(v));
-    copy(v.begin(), v.end(), ostream_iterator<int>(cout, "\n"));
-
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}
+/*
+default_random_engine
+minstd_rand
+minstd_rand0
+mt19937
+mt19937_64
+ranlux24_base
+ranlux48_base
+ranlux24
+ranlux48
+knuth_b
+ */
